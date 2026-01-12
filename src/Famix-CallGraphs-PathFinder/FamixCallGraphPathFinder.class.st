@@ -32,11 +32,31 @@ FamixCallGraphPathFinder >> findAllPathFrom: startNode to: targetNode [
 ]
 
 { #category : 'accessing' }
+FamixCallGraphPathFinder >> findAllPathFromNodeNamed: startNodeName toNodeNamed: targetNodeName [
+
+	| startNode targetNode |
+	startNode := self graph nodeNamed: startNodeName.
+	targetNode := self graph nodeNamed: targetNodeName.
+
+	^ self findAllPathFrom: startNode to: targetNode
+]
+
+{ #category : 'accessing' }
 FamixCallGraphPathFinder >> findPathFrom: startNode to: targetNode [
 
 	self checkValidityOf: startNode and: targetNode.
 
 	^ self unsafeFindPathFrom: startNode to: targetNode
+]
+
+{ #category : 'accessing' }
+FamixCallGraphPathFinder >> findPathFromNodeNamed: startNodeName toNodeNamed: targetNodeName [
+
+	| startNode targetNode |
+	startNode := self graph nodeNamed: startNodeName.
+	targetNode := self graph nodeNamed: targetNodeName.
+
+	^ self findPathFrom: startNode to: targetNode
 ]
 
 { #category : 'accessing' }

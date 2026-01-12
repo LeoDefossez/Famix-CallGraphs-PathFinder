@@ -7,6 +7,41 @@ Class {
 }
 
 { #category : 'tests' }
+FamixJavaCallGraphPathFinderExample1Test >> testFindAllPathFromNodeNamedToNodeNamed [
+
+	| entrypoint midpoint endpoint result |
+	entrypoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.A1.main(String[])' ]) anyOne.
+	midpoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.B1.method()' ]) anyOne.
+	endpoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.B1.method(String)' ]) anyOne.
+
+	result := pathFinder findAllPathFromNodeNamed: 'example1.A1.main(String[])' toNodeNamed: 'example1.B1.method(String)'.
+
+	self assert: result size equals: 1.
+	self assertCollection: result first asOrderedCollection equals: {
+			entrypoint.
+			midpoint.
+			endpoint } asOrderedCollection
+]
+
+{ #category : 'tests' }
+FamixJavaCallGraphPathFinderExample1Test >> testFindAllPathFromTo [
+
+	| entrypoint midpoint endpoint result |
+	entrypoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.A1.main(String[])' ]) anyOne.
+	midpoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.B1.method()' ]) anyOne.
+	endpoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.B1.method(String)' ]) anyOne.
+
+	result := pathFinder findAllPathFrom: entrypoint to: endpoint.
+
+
+	self assert: result size equals: 1.
+	self assertCollection: result first asOrderedCollection equals: {
+			entrypoint.
+			midpoint.
+			endpoint } asOrderedCollection
+]
+
+{ #category : 'tests' }
 FamixJavaCallGraphPathFinderExample1Test >> testFindAllPathFromToFirstNodeNotInGraph [
 
 	| entrypoint endpoint |
@@ -27,6 +62,22 @@ FamixJavaCallGraphPathFinderExample1Test >> testFindAllPathFromToLastNodeNotInGr
 ]
 
 { #category : 'tests' }
+FamixJavaCallGraphPathFinderExample1Test >> testFindPathFromNodeNamedToNodeNamed [
+
+	| entrypoint midpoint endpoint result |
+	entrypoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.A1.main(String[])' ]) anyOne.
+	midpoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.B1.method()' ]) anyOne.
+	endpoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.B1.method(String)' ]) anyOne.
+
+	result := pathFinder findPathFromNodeNamed: 'example1.A1.main(String[])' toNodeNamed: 'example1.B1.method(String)'.
+
+	self assertCollection: result asOrderedCollection equals: {
+			entrypoint.
+			midpoint.
+			endpoint } asOrderedCollection
+]
+
+{ #category : 'tests' }
 FamixJavaCallGraphPathFinderExample1Test >> testFindPathFromTo [
 
 	| entrypoint midpoint endpoint result |
@@ -34,11 +85,9 @@ FamixJavaCallGraphPathFinderExample1Test >> testFindPathFromTo [
 	midpoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.B1.method()' ]) anyOne.
 	endpoint := (self graph allNodes select: [ :node | node realMethod mooseName = 'example1.B1.method(String)' ]) anyOne.
 
-	result := pathFinder findAllPathFrom: entrypoint to: endpoint.
+	result := pathFinder findPathFrom: entrypoint to: endpoint.
 
-
-	self assert: result size equals: 1.
-	self assertCollection: result first asOrderedCollection equals: {
+	self assertCollection: result asOrderedCollection equals: {
 			entrypoint.
 			midpoint.
 			endpoint } asOrderedCollection
