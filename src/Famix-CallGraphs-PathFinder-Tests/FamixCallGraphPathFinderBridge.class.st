@@ -15,5 +15,5 @@ FamixCallGraphPathFinderBridge class >> resources [
 { #category : 'accessing' }
 FamixCallGraphPathFinderBridge class >> sources [
 
-	^ self resources / 'sources' / 'callgraphPathFinder'
+	^ self resources / 'sources' 
 ]
