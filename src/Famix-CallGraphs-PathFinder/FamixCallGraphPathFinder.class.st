@@ -1,3 +1,26 @@
+"
+Offer a simple API for finding path between to node of a graph, using a Breadth-First Search algorithm
+
+How to initialize :
+```smalltalk
+FamixCallGraphPathFinder newOn: aGraph
+```
+
+Main API :
+```smalltalk
+""try finding a path between two node""
+finder findPathFrom: startNode to: targetNode.
+
+""Search for all paths between two node (with a colloration algorithm)""
+finder findAllPathFrom: startNode to: targetNode.
+
+""Search for a path between two node given the full qualified name of their method""
+finder findPathFromNodeNamed: startNodeName toNodeNamed: targetNodeName.
+
+""Search for all paths between two node given the full qualified name of their method""
+finder findAllPathFromNodeNamed: startNodeName toNodeNamed: targetNodeName
+```
+"
 Class {
 	#name : 'FamixCallGraphPathFinder',
 	#superclass : 'Object',
