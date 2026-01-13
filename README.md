@@ -19,24 +19,19 @@ Metacello new
 
 ## Workflow & Usage
 
-### 1. Initialize your finder on a graph
-```smalltalk
-FamixCallGraphPathFinder newOn: aGraph
-```
-
-### 2. Choose one of the following method to find path between two nodes of the graph
+### Choose one of the following method to find path between two nodes of the graph
 ```smalltalk
 "try finding a path between two node"
-finder findPathFrom: startNode to: targetNode.
+aGraph findPathFrom: startNode to: targetNode.
 
 "Search for all paths between two node (with a colloration algorithm)"
-finder findAllPathFrom: startNode to: targetNode.
+aGraph findAllPathFrom: startNode to: targetNode.
 
 "Search for a path between two node given the full qualified name of their method"
-finder findPathFromNodeNamed: startNodeName toNodeNamed: targetNodeName.
+aGraph findPathFromNodeNamed: startNodeName toNodeNamed: targetNodeName.
 
 "Search for all paths between two node given the full qualified name of their method"
-finder findAllPathFromNodeNamed: startNodeName toNodeNamed: targetNodeName
+aGraph findAllPathFromNodeNamed: startNodeName toNodeNamed: targetNodeName
 ``` 
 
 
