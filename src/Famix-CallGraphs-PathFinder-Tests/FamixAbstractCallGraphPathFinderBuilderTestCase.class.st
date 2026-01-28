@@ -44,9 +44,9 @@ FamixAbstractCallGraphPathFinderBuilderTestCase >> graph [
 ]
 
 { #category : 'accessing' }
-FamixAbstractCallGraphPathFinderBuilderTestCase >> javaModel [
+FamixAbstractCallGraphPathFinderBuilderTestCase >> model [
 
-	^ self sourceResource javaModel
+	^ self sourceResource model
 ]
 
 { #category : 'accessing' }
@@ -54,12 +54,6 @@ FamixAbstractCallGraphPathFinderBuilderTestCase >> openSources [
 
 	<script: 'self new openSources'>
 	self resources anyOne javaSourcesFolder openInOSFileBrowser
-]
-
-{ #category : 'accessing' }
-FamixAbstractCallGraphPathFinderBuilderTestCase >> performTest [
-
-	FamixCallGraphAdditionalProperties newInstanceDuring: [ super performTest ]
 ]
 
 { #category : 'accessing' }

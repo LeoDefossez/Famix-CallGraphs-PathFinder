@@ -3,7 +3,7 @@ Class {
 	#superclass : 'TestResource',
 	#instVars : [
 		'graph',
-		'javaModel'
+		'model'
 	],
 	#category : 'Famix-CallGraphs-PathFinder-Tests-Resources',
 	#package : 'Famix-CallGraphs-PathFinder-Tests',
@@ -23,44 +23,14 @@ FamixAbstractCallGraphPathFinderBuilderTestResource class >> javaSourcesFolder [
 ]
 
 { #category : 'accessing' }
-FamixAbstractCallGraphPathFinderBuilderTestResource class >> sourcesFolder [
-	"Return the java folder containing the sources to parse for those tests"
-
-	| folder |
-	folder := self sourcesFolder / 'src'.
-
-	folder ifAbsent: [ self error: 'Folder does not exists ' , folder pathString ].
-
-	^ folder
-]
-
-{ #category : 'accessing' }
 FamixAbstractCallGraphPathFinderBuilderTestResource >> entryPoints [
 
-	^ javaModel allMethods select: [ :method | method name = 'main' ]
-]
-
-{ #category : 'accessing' }
-FamixAbstractCallGraphPathFinderBuilderTestResource >> generateGraph [
-
-	graph := (FamixJavaCHABuilder entryPoints: self entryPoints) build
+	^ model allMethods select: [ :method | method name = 'main' ]
 ]
 
 { #category : 'accessing' }
 FamixAbstractCallGraphPathFinderBuilderTestResource >> graph [
 	^ graph
-]
-
-{ #category : 'accessing' }
-FamixAbstractCallGraphPathFinderBuilderTestResource >> importModels [
-
-	javaModel := (FamixJavaFoldersImporter importFolders: { self javaSourcesFolder }) anyOne.
-]
-
-{ #category : 'accessing' }
-FamixAbstractCallGraphPathFinderBuilderTestResource >> javaModel [
-
-	^ javaModel
 ]
 
 { #category : 'accessing' }
@@ -70,17 +40,23 @@ FamixAbstractCallGraphPathFinderBuilderTestResource >> javaSourcesFolder [
 ]
 
 { #category : 'accessing' }
+FamixAbstractCallGraphPathFinderBuilderTestResource >> model [
+
+	^ model
+]
+
+{ #category : 'accessing' }
 FamixAbstractCallGraphPathFinderBuilderTestResource >> setUp [
 
 	super setUp.
-	self importModels.
-	self generateGraph
+	model := (FamixJavaFoldersImporter importFolders: { self javaSourcesFolder }) anyOne.
+	graph := (FamixJavaCHABuilder entryPoints: self entryPoints) build
 ]
 
 { #category : 'accessing' }
 FamixAbstractCallGraphPathFinderBuilderTestResource >> tearDown [
 
-	javaModel := nil.
+	model := nil.
 	graph := nil.
 	super tearDown
 ]
